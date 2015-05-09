@@ -7,19 +7,16 @@
         <span class="icon-bar"></span>
       </button>
       <%= link_to root_path, class: 'navbar-brand' do %>
-        <%= image_tag "http://placehold.it/200x100&text=logo", class: 'logo' %>
+        <%= image_tag "http://placehold.it/200x100&text=Phifflarn", class: 'logo' %>
       <% end %>
     </div>
 
     <div class="navbar-collapse navbar-right first-navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><%= link_to "Example", "#" %></li>
-        <% if current_user %>
-          <li><%= link_to "Log out", logout_path %></li>
-        <% else %>
-          <li><%= link_to "Log in", login_path %></li>
-          <li><%= link_to "Sign up", new_user_path %></li>
-        <% end %>
+        <li><%= link_to 'New chunk', new_chunk_path %></li>
+        <li><%= link_to 'Chunks', chunks_path %></li>
+        <li><%= link_to 'Entities', entities_path %></li>
+        <li><%= link_to 'Performed searches', searches_path %></li>
       </ul>
     </div>
   </div>

@@ -1,5 +1,7 @@
 class ChunksController < ApplicationController
   before_action :set_chunk, only: [:show, :edit, :update, :destroy]
+  # FIXME: Don't do it like this in production
+  protect_from_forgery except: :create
 
   # GET /chunks
   # GET /chunks.json
@@ -24,10 +26,14 @@ class ChunksController < ApplicationController
   # POST /chunks
   # POST /chunks.json
   def create
-    @chunk = Chunk.new(chunk_params)
+    content = params[:content] || params[:chunk][:content]
+    @chunk = Chunk.new(content: content)
 
     respond_to do |format|
       if @chunk.save
+        enity_creator = EntityCreator.new(@chunk)
+        enity_creator.persist!
+
         format.html { redirect_to @chunk, notice: 'Chunk was successfully created.' }
         format.json { render :show, status: :created, location: @chunk }
       else

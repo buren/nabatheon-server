@@ -24,6 +24,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 
 gem 'wikipedia-client', '~> 1.3.3'
+gem 'nabatheon', path: '/Users/buren/development/personal/nabatheon'
 
 group :development, :test do
   gem 'guard'

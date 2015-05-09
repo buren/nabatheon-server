@@ -23,8 +23,13 @@ class WikiLookup
     page.image_urls
   end
 
+  def content
+    page.sanitized_content
+  end
+
   def coordinates
-    return unless exists?
+    return unless exist?
+    return if page.coordinates.nil?
 
     lat  = page.coordinates[0]
     long = page.coordinates[1]
@@ -34,7 +39,18 @@ class WikiLookup
     }
   end
 
-  def exists?
+  def exist?
     !page.categories.nil?    
+  end
+
+  def to_json
+    {
+      title:       title,
+      links:       links,
+      categories:  categories,
+      image_urls:  image_urls,
+      coordinates: coordinates,
+      content:     content
+    }.to_json
   end
 end

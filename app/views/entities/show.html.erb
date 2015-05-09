@@ -3,7 +3,7 @@
     <div class="container">
         <p>
         <strong>Type:</strong>
-        <%= @entity.type %>
+        <%= @entity.value_type %>
       </p>
         <p>
         <strong>Value:</strong>
@@ -11,7 +11,7 @@
       </p>
         <p>
         <strong>Chunk:</strong>
-        <%= @entity.chunk %>
+        <%= link_to(@entity.chunk.content.truncate(60), chunks_path(@entity.chunk)) %>
       </p>
   
       <%= link_to 'Back', entities_path, class: 'btn btn-primary' %>

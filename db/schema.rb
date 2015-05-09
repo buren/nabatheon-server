@@ -11,7 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150509095014) do
+ActiveRecord::Schema.define(version: 20150509130854) do
+
+  create_table "chunks", force: :cascade do |t|
+    t.text     "content",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "entities", force: :cascade do |t|
+    t.string   "type",       limit: 255
+    t.string   "value",      limit: 255
+    t.integer  "chunk_id",   limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "value_type", limit: 255
+  end
+
+  add_index "entities", ["chunk_id"], name: "index_entities_on_chunk_id", using: :btree
+
+  create_table "searches", force: :cascade do |t|
+    t.text     "json_text",  limit: 4294967295
+    t.integer  "chunk_id",   limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "entity_id",  limit: 4
+    t.boolean  "fetched",    limit: 1
+  end
+
+  add_index "searches", ["chunk_id"], name: "index_searches_on_chunk_id", using: :btree
+  add_index "searches", ["entity_id"], name: "index_searches_on_entity_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",             limit: 255
@@ -22,4 +51,7 @@ ActiveRecord::Schema.define(version: 20150509095014) do
     t.datetime "updated_at",                    null: false
   end
 
+  add_foreign_key "entities", "chunks"
+  add_foreign_key "searches", "chunks"
+  add_foreign_key "searches", "entities"
 end

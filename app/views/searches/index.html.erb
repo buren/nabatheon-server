@@ -1,0 +1,23 @@
+<% content_for :content do %>
+  <section>
+    <div class="container">
+      <h1>Listing Searches - <%= link_to 'New Search', new_search_path, class: 'btn btn-primary btn-xs'%></h1>
+      <%= generate_table(
+        striped: true,
+        data_table: true,
+        header: [
+          'Chunk', 'Entity type', 'Entity value', '', '', ''
+          ],
+        content: @searches.map do |search|
+          [
+            link_to(search.chunk.content.truncate(40), chunks_path(search.chunk)),
+            search.entity.value_type,
+            link_to("#{search.entity.value}", entity_path(search.entity)),
+            link_to('Show', search_path(search)),
+            link_to('Edit', edit_search_path(search)),
+            link_to('Destroy', search, method: :delete, data: { confirm: 'Are you sure?' })
+          ]
+        end) %>
+    </div>
+  </section>
+<% end %>
