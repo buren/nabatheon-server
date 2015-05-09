@@ -1,0 +1,13 @@
+<% content_for :content do %>
+  <section>
+    <div class="container">
+        <p>
+        <strong>Content:</strong>
+        <%= @chunk.content %>
+      </p>
+  
+      <%= link_to 'Back', chunks_path, class: 'btn btn-primary' %>
+      <%= link_to 'Edit', edit_chunk_path(@chunk), class: 'btn btn-primary' %>
+    </div>
+  </section>
+<% end %>
