@@ -13,7 +13,7 @@
 
           <% if @wiki.coordinates %>
             <p><strong>Map</strong></p>
-            <%= image_tag @search.map_url %>
+            <%= image_tag @search.map_url, class: 'img-responsive' %>
           <% end %>
         </div>
         <div class="col-sm-6">
